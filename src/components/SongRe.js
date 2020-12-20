@@ -1,9 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { addSong } from "../features/player/playerSlice";
+import { useSelector } from "react-redux";
+import { selectuser } from "../features/user/userSlice";
+import db from "../utils/firebase";
 
 const SongRe = ({ title, imagesrc, id }) => {
-  const dispatch = useDispatch();
+  const user = useSelector(selectuser);
   return (
     <div
       className="songreq"
@@ -18,11 +19,16 @@ const SongRe = ({ title, imagesrc, id }) => {
       <h4 style={{ textAlign: "center" }}>{title.substring(0, 20)}</h4>
       <button
         onClick={() => {
-          dispatch(
-            addSong({
-              songId: id,
-            })
-          );
+          // dispatch(
+          //   addSong({
+          //     songId: id,
+          //   })
+          // );
+          db.collection("users").doc(user.email).set({
+            id: id,
+            name: title,
+            playing: true,
+          });
         }}
       >
         Play

@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SongRe from "./SongRe";
-import { setSearchState } from "../features/appSlice";
+import { selectSearch, setSearchState } from "../features/appSlice";
 const Search = () => {
   const [search, setSearch] = useState([]);
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
+  const SearchState = useSelector(selectSearch);
   const handleSearch = async (query) => {
     dispatch(setSearchState({ search: "loading" }));
 
@@ -44,7 +45,11 @@ const Search = () => {
 
       <div className="Search__container">
         {search.length <= 0
-          ? "There is No search"
+          ? SearchState
+            ? "Loading ..."
+            : "There is No search"
+          : SearchState === "loading"
+          ? "Loading ..."
           : search.map((song, key) => (
               <SongRe
                 key={key}

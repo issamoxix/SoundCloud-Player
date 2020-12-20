@@ -97,3 +97,58 @@ body {
     height: 50vh;
   }
 }
+
+/* Login Page */
+.LoginContainer img {
+  object-fit: contain;
+  height: 150px;
+}
+.LoginContainer {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+.LoginButton {
+  border: none;
+  padding: 20px;
+  font-size: larger;
+  outline: none;
+  transition: all 0.2s linear;
+  cursor: pointer;
+  width: 60vw;
+  color: #fff;
+  border-radius: 20vw;
+  background-color: #ff5500;
+}
+/* NavBar */
+.Navbar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: #fc732fb5;
+  width: 100vw;
+  height: 5vh;
+  padding: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+.Disco {
+  border: none;
+  background-color: #ff5500;
+  padding: 0 10px;
+  color: #fff;
+  outline: none;
+  border-radius: 2px;
+  margin: 0 8px;
+  cursor: pointer;
+}
+/* SongPlayer */
+.SongPlayer {
+  margin-top: 5.5vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
