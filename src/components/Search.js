@@ -44,10 +44,10 @@ const Search = () => {
       </div>
 
       <div className="Search__container">
-        {search.length <= 0
+        {search && search.length <= 0
           ? SearchState
             ? "Loading ..."
-            : "There is No search"
+            : "Search for somthing ..."
           : SearchState === "loading"
           ? "Loading ..."
           : search.map((song, key) => (
