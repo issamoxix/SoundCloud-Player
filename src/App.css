@@ -1,0 +1,99 @@
+.PlayButton {
+  padding: 20px;
+  font-size: larger;
+  cursor: pointer;
+  color: white;
+  background: #ff5500;
+  font-weight: lighter;
+  border: none;
+  outline: none;
+  transition: all 0.2s linear;
+  width: 50vw;
+  border-radius: 50vw;
+  margin-top: 9px;
+}
+.PlayButton:active {
+  font-size: large;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.songreq button {
+  padding: 20px;
+  background: #ff5500;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+
+  opacity: 0.7;
+  outline: none;
+  transition: all 0.2s linear;
+}
+.songreq button:hover {
+  opacity: 1;
+}
+.PlayerInfo h3 span {
+  color: #ff5500;
+}
+.songreq {
+  width: 20vw;
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  border-radius: 7px;
+  margin: 9px;
+  transition: all 0.2s linear;
+}
+.Search__container {
+  display: flex;
+  flex-wrap: wrap;
+  transition: all 0.2s linear;
+  width: 92vw;
+}
+.SearchBar {
+  border-color: #ff5500;
+  font-size: large;
+  outline: none;
+  border-radius: 7px;
+  padding: 7px;
+  margin-right: 5px;
+}
+.Search__section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+.Search__main {
+}
+body {
+  background: #ee814b8c;
+}
+.SearchButton {
+  padding: 10px;
+  background: #ff5500;
+  font-size: larger;
+  font-weight: bolder;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 7px;
+  opacity: 0.7;
+  outline: none;
+}
+@media (max-width: 600px) {
+  .Search__container {
+    width: 100vw;
+  }
+  .songreq {
+    width: 100vw;
+    height: 50vh;
+  }
+}
