@@ -24,7 +24,7 @@ const SongRe = ({ title, imagesrc, id }) => {
           //     songId: id,
           //   })
           // );
-          db.collection("users").doc(user.email).set({
+          db.collection("users").doc(user.email).update({
             id: id,
             name: title,
             playing: true,

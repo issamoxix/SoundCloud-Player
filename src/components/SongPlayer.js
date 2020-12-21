@@ -7,10 +7,11 @@ import db from "../utils/firebase";
 const SongPlayer = () => {
   const [track_id, setTrack] = useState(0); //626460957
   const [autop, setAuto] = useState(false); //false it mean it's paused
-  const Playsong = useSelector(selectSongPlay);
   const src = `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${track_id}&color=%23ff5500&auto_play=${autop}&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
+  const Playsong = useSelector(selectSongPlay);
   const SongId = useSelector(selectSongId);
   const user = useSelector(selectuser);
+
   useEffect(() => {
     SongId && setTrack(SongId);
     setAuto(Playsong);
@@ -18,7 +19,7 @@ const SongPlayer = () => {
   return (
     <div className="SongPlayer">
       {track_id === 0 ? (
-        "Select A song"
+        <h2 style={{ color: "gray", fontWeight: 500 }}>Select a song</h2>
       ) : (
         <>
           <iframe
