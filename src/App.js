@@ -7,13 +7,15 @@ import SongPlayer from "./components/SongPlayer";
 import db, { auth } from "./utils/firebase";
 import { addUser, logout, selectuser } from "./features/user/userSlice";
 import Navbar from "./components/Navbar";
-import { addSong } from "./features/player/playerSlice";
+import { addSong, setVol } from "./features/player/playerSlice";
+import Controller from "./components/Controller";
+import { selectPage } from "./features/appSlice";
 
 function App() {
   const [check, setCheck] = useState(false);
   const user = useSelector(selectuser);
   const dispatch = useDispatch();
-
+  const page = useSelector(selectPage);
   useEffect(() => {
     if (user) {
       db.collection("users")
@@ -25,6 +27,7 @@ function App() {
               songId: data.id,
               songName: data.name,
               playing: data.playing,
+              vol: data.vol,
             })
           );
         });
@@ -54,6 +57,7 @@ function App() {
               name: null,
               type: null,
               id: null,
+              vol: 50,
             })
             .catch(function (error) {
               console.error("Error writing document: ", error);
@@ -71,7 +75,7 @@ function App() {
       {user ? (
         <>
           <Navbar />
-          <SongPlayer />
+          {!page ? <SongPlayer /> : <Controller />}
           <Search />
         </>
       ) : (

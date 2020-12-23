@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectSongId, selectSongPlay } from "../features/player/playerSlice";
+import {
+  selectSongId,
+  selectSongPlay,
+  selectVol,
+} from "../features/player/playerSlice";
 import { selectuser } from "../features/user/userSlice";
 import db from "../utils/firebase";
 import Go from "./Go";
@@ -12,14 +16,18 @@ const SongPlayer = () => {
   const Playsong = useSelector(selectSongPlay);
   const SongId = useSelector(selectSongId);
   const user = useSelector(selectuser);
+  const Vol = useSelector(selectVol);
   const StartPlaying = (n) => {
     var p = Go();
-
     if (n === 1) {
       p.play();
     } else {
       p.pause();
     }
+  };
+  const ModVol = (n) => {
+    var p = Go();
+    p.setVolume(n);
   };
   useEffect(() => {
     SongId && setTrack(SongId);
@@ -31,6 +39,12 @@ const SongPlayer = () => {
         StartPlaying(0);
       }
     }
+    db.collection("users")
+      .doc(user.email)
+      .onSnapshot((snapshot) => {
+        let data = snapshot.data();
+        track_id !== 0 && ModVol(data.vol);
+      });
   }, [SongId, Playsong]);
   return (
     <div className="SongPlayer">
@@ -53,6 +67,7 @@ const SongPlayer = () => {
             className="PlayButton"
             onClick={() => {
               var p = Go();
+
               {
                 autop ? p.play() : p.pause();
               }
