@@ -3,18 +3,34 @@ import { useSelector } from "react-redux";
 import { selectSongId, selectSongPlay } from "../features/player/playerSlice";
 import { selectuser } from "../features/user/userSlice";
 import db from "../utils/firebase";
+import Go from "./Go";
 
 const SongPlayer = () => {
   const [track_id, setTrack] = useState(0); //626460957
-  const [autop, setAuto] = useState(false); //false it mean it's paused
-  const src = `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${track_id}&color=%23ff5500&auto_play=${autop}&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
+  const [autop, setAuto] = useState(true); //false it mean it's paused
+  const src = `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${track_id}&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
   const Playsong = useSelector(selectSongPlay);
   const SongId = useSelector(selectSongId);
   const user = useSelector(selectuser);
+  const StartPlaying = (n) => {
+    var p = Go();
 
+    if (n === 1) {
+      p.play();
+    } else {
+      p.pause();
+    }
+  };
   useEffect(() => {
     SongId && setTrack(SongId);
     setAuto(Playsong);
+    if (track_id !== 0) {
+      if (Playsong) {
+        StartPlaying(1);
+      } else {
+        StartPlaying(0);
+      }
+    }
   }, [SongId, Playsong]);
   return (
     <div className="SongPlayer">
@@ -32,11 +48,19 @@ const SongPlayer = () => {
             allow="autoplay"
             src={src}
           ></iframe>
+
           <button
             className="PlayButton"
-            onClick={() =>
-              db.collection("users").doc(user.email).update({ playing: !autop })
-            }
+            onClick={() => {
+              var p = Go();
+              {
+                autop ? p.play() : p.pause();
+              }
+
+              db.collection("users")
+                .doc(user.email)
+                .update({ playing: !autop });
+            }}
           >
             {autop ? "Pause" : "Play"}{" "}
           </button>

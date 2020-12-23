@@ -8,6 +8,7 @@ import db, { auth } from "./utils/firebase";
 import { addUser, logout, selectuser } from "./features/user/userSlice";
 import Navbar from "./components/Navbar";
 import { addSong } from "./features/player/playerSlice";
+
 function App() {
   const [check, setCheck] = useState(false);
   const user = useSelector(selectuser);
