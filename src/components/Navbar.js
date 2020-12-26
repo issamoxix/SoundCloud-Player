@@ -3,14 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectuser } from "../features/user/userSlice";
 import { auth } from "../utils/firebase";
 import { setPage } from "../features/appSlice";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { Avatar } from "@material-ui/core";
 const Navbar = () => {
   const User = useSelector(selectuser);
   const dispatch = useDispatch();
   return (
     <div className="Navbar">
-      <button className="Disco" onClick={() => auth.signOut()}>
-        Disconnect
-      </button>
+      <ExitToAppIcon
+        className="Disco"
+        fontSize="large"
+        onClick={() => auth.signOut()}
+      />
+
       <button
         className="NavItem"
         onClick={() =>
@@ -35,7 +40,7 @@ const Navbar = () => {
       >
         Player
       </button>
-      <h4>{User.displayName}</h4>
+      <Avatar src={User.photo} />
     </div>
   );
 };
